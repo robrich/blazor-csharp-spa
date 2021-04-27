@@ -19,13 +19,14 @@ namespace BlazorSPA.Server.Controllers
 		}
 
 		[HttpGet("")]
+		[ProducesResponseType(typeof(List<Order>), StatusCodes.Status200OK)]
 		public ActionResult<List<Order>> GetAll(string query)
 		{
 			return orderRepository.GetAll(query);
 		}
 
 		[HttpGet("{id}", Name = nameof(GetById))]
-		[ProducesResponseType(typeof(List<Order>), StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(Order), StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public ActionResult<Order> GetById(int id)
 		{
@@ -41,7 +42,7 @@ namespace BlazorSPA.Server.Controllers
 		}
 
 		[HttpPost("")]
-		[ProducesResponseType(StatusCodes.Status201Created)]
+		[ProducesResponseType(typeof(Order), StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		public ActionResult<Order> Create([FromBody] Order order)
 		{
